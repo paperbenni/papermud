@@ -1,17 +1,21 @@
 import curses
-from curses.textpad import Textbox, rectangle
+import papermud
 
-def main(stdscr):
-    stdscr.addstr(0, 0, "Enter IM message: (hit Ctrl-G to send)")
+stdscr = curses.initscr()
+curses.cbreak()
+curses.noecho()
+stdscr.keypad(True)
 
-    editwin = curses.newwin(5,30, 2,1)
-    rectangle(stdscr, 1,0, 1+5+1, 1+30+1)
-    stdscr.refresh()
+curses.start_color()
+curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
+curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
 
-    box = Textbox(editwin)
 
-    # Let the user edit until Ctrl-G is struck.
-    box.edit()
+lal = papermud.rendermenu(0, 2, stdscr, ["this", "is", "a", "test", "lol", "going", "good", "so", "far"])
 
-    # Get resulting contents
-    message = box.gather()
+curses.nocbreak()
+stdscr.keypad(False)
+curses.echo()
+curses.endwin()
+
+print("lal", lal)
