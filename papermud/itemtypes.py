@@ -1,0 +1,3 @@
+MICS = 0
+WAND = 1
+WEARABLE = 2
